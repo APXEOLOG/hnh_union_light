@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<project name="haven" default="deftgt">
+<project name="hnh_union_light" default="deftgt">
   <target name="build-env">
     <mkdir dir="build" />
     <mkdir dir="build/classes" />
