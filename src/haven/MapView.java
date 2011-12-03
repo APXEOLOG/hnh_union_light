@@ -45,6 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import union.UnionUtils;
+
 public class MapView extends Widget implements DTarget, Console.Directory {
     static Color[] olc = new Color[31];
     static Map<String, Class<? extends Camera>> camtypes = new HashMap<String, Class<? extends Camera>>();
@@ -105,6 +107,7 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 		    int pgob = -1;
 		    if(args.length > 2)
 			pgob = (Integer)args[2];
+		    UnionUtils.playerId = pgob;
 		    return(new MapView(c, sz, parent, mc, pgob));
 		}
 	    });
@@ -839,7 +842,7 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 	} catch (Loading e) {}
     }
     
-    private void drawradius(GOut g, Coord c, int radius) {
+    public void drawradius(GOut g, Coord c, int radius) {
 	g.fellipse(c, new Coord((int)(radius * 4 * Math.sqrt(0.5)), (int)(radius * 2 * Math.sqrt(0.5))));
     }
     
@@ -1081,6 +1084,7 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 	    drawbeastradius(g);
 	}
 	
+	UnionUtils.updateProfits(glob.oc, g);
 	drawtracking(g);
 	
 	if(curf != null)

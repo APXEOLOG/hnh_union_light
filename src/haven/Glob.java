@@ -45,6 +45,8 @@ public class Glob {
     public Map<Integer, Buff> buffs = new TreeMap<Integer, Buff>();
     public java.awt.Color amblight = null;
     
+    public static Glob instance = null;
+    
     public Glob(Session sess) {
 	
 	this.sess = sess;
@@ -71,6 +73,7 @@ public class Glob {
 	paginae.add(Resource.load("paginae/add/hide/mans"));
 	paginae.add(Resource.load("paginae/add/hide/plan"));
 	paginae.add(Resource.load("paginae/add/hide/ston"));
+	instance = this;
     }
     
     public static class CAttr extends Observable {

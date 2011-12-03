@@ -50,6 +50,8 @@ import java.util.WeakHashMap;
 
 import javax.imageio.ImageIO;
 
+import union.UnionUtils;
+
 public class MiniMap extends Widget {
     static Map<String, Tex> grids = new WeakHashMap<String, Tex>();
     static Set<String> loading = new HashSet<String>();
@@ -229,6 +231,7 @@ public class MiniMap extends Widget {
 	this.mv = mv;
 	off = new Coord();
 	newMappingSession();
+	ui.minimap = this;
     }
     
     public static Tex getgrid(final String nm) {
@@ -381,6 +384,10 @@ public class MiniMap extends Widget {
 		    g.chcolor();
 		}
 	    }
+	}
+	if (!hidden) {
+		UnionUtils.drawVisSquare(g, tc, hsz);
+		UnionUtils.drawProfitMinimap(g, tc, hsz);
 	}
 	g.gl.glPopMatrix();
 	super.draw(og);

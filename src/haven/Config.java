@@ -46,6 +46,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import union.UnionUtils;
+
 import ender.GoogleTranslator;
 
 public class Config {
@@ -322,6 +324,7 @@ public class Config {
         }
         Resource.checkhide();
         timestamp = options.getProperty("timestamp","false").equals("true");
+        UnionUtils.loadCuriosityInfo();
     }
 
     public static synchronized void setWindowOpt(String key, String value) {

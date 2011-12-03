@@ -41,6 +41,7 @@ public class UI {
     public Speedget spd;
     public Study study;
     public WikiBrowser wiki;
+    public MiniMap minimap;
     private Widget keygrab, mousegrab;
     public Map<Integer, Widget> widgets = new TreeMap<Integer, Widget>();
     public Map<Widget, Integer> rwidgets = new HashMap<Widget, Integer>();
