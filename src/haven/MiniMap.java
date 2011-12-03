@@ -386,8 +386,8 @@ public class MiniMap extends Widget {
 	    }
 	}
 	if (!hidden) {
-		UnionUtils.drawVisSquare(g, tc, hsz);
-		UnionUtils.drawProfitMinimap(g, tc, hsz);
+		if (Config.union_vision_range) UnionUtils.drawVisSquare(g, tc, hsz);
+		if (Config.union_curiosity) UnionUtils.drawProfitMinimap(g, tc, hsz);
 	}
 	g.gl.glPopMatrix();
 	super.draw(og);

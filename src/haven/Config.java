@@ -96,7 +96,11 @@ public class Config {
     public static boolean sshot_nonames;
     public static boolean newclaim;
     public static boolean showq;
+    public static boolean union_vision_range = true;
+    public static boolean union_curiosity = true;
     public static boolean showpath;
+    
+    
     public static Map<String, Map<String, Float>> FEPMap = new HashMap<String, Map<String, Float>>();
     
     static {
@@ -312,6 +316,8 @@ public class Config {
         newclaim = options.getProperty("newclaim", "true").equals("true");
         showq = options.getProperty("showq", "true").equals("true");
         showpath = options.getProperty("showpath", "false").equals("true");
+        union_vision_range = options.getProperty("union_vision_range", "true").equals("true");
+        union_curiosity = options.getProperty("union_curiosity", "true").equals("true");
         sfxVol = Integer.parseInt(options.getProperty("sfx_vol", "100"));
         musicVol = Integer.parseInt(options.getProperty("music_vol", "100"));
         hideObjectList.clear();
@@ -392,7 +398,8 @@ public class Config {
         options.setProperty("newclaim", newclaim?"true":"false");
         options.setProperty("showq", showq?"true":"false");
         options.setProperty("showpath", showpath?"true":"false");
-        
+        options.setProperty("union_vision_range", union_vision_range?"true":"false");
+        options.setProperty("union_curiosity", union_curiosity?"true":"false");
         try {
             options.store(new FileOutputStream("haven.conf"), "Custom config options");
         } catch (IOException e) {
