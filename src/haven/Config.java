@@ -99,6 +99,7 @@ public class Config {
     public static boolean union_vision_range = true;
     public static boolean union_curiosity = true;
     public static boolean showpath;
+    public static boolean assign_to_tile = false;
     
     
     public static Map<String, Map<String, Float>> FEPMap = new HashMap<String, Map<String, Float>>();

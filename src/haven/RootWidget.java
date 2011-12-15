@@ -63,7 +63,9 @@ public class RootWidget extends ConsoleHost {
 		Config.nightvision = !Config.nightvision;
 	    } else if((code == KeyEvent.VK_X)&&ctrl) {
 		Config.xray = !Config.xray;
-	    } else if((code == KeyEvent.VK_H)&&ctrl) {
+	    } else if ((code == KeyEvent.VK_Z) && ctrl) {
+			Config.assign_to_tile = !Config.assign_to_tile;
+		} else if((code == KeyEvent.VK_H)&&ctrl) {
 		Config.hide = !Config.hide;
 	    } else if((code == KeyEvent.VK_Q)&&alt) {
 		ui.spd.setspeed(0, true);

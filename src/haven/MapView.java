@@ -609,6 +609,9 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 		    glob.oc.checkqueue();
 		} else {
 		    glob.oc.clearqueue();
+		    if (Config.assign_to_tile) {
+				mc = tilify(mc);
+			}
 		    wdgmsg("click", c0, mc, button, ui.modflags());
 		}
 	    } else {
@@ -1023,6 +1026,22 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 	}
     }
     
+    private void drawTileSelection(GOut g, Coord tc, Coord sc) {
+		Coord c1 = sc;
+		Coord c2 = sc.add(m2s(new Coord(0, MCache.tilesz.y)));
+		Coord c3 = sc.add(m2s(new Coord(MCache.tilesz.x, MCache.tilesz.y)));
+		Coord c4 = sc.add(m2s(new Coord(MCache.tilesz.x, 0)));
+		Color cl = Color.red;
+		g.chcolor(new Color(cl.getRed(), cl.getGreen(), cl.getBlue(), 32));
+		g.frect(c1, c2, c3, c4);
+		g.chcolor(cl);
+		g.line(c2, c1, 1.5);
+		g.line(c1.add(1, 0), c4.add(1, 0), 1.5);
+		g.line(c4.add(1, 0), c3.add(1, 0), 1.5);
+		g.line(c3, c2, 1.5);
+		g.chcolor();
+	}
+    
     public void drawmap(GOut g) {
 	int x, y, i;
 	int stw, sth;
@@ -1030,6 +1049,11 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 	
 	if(Config.profile)
 	    curf = prof.new Frame();
+	
+	Coord mouseTilePos = Coord.z;
+	if (mousepos != null && Config.assign_to_tile)
+		mouseTilePos = mousepos.div(MCache.tilesz);
+	
 	stw = (tilesz.x * 4) - 2;
 	sth = tilesz.y * 2;
 	oc = viewoffset(sz, mc);
@@ -1045,6 +1069,9 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 		    drawtile(g, ctc, sc);
 		    sc.x += tilesz.x * 2;
 		    if(!Config.newclaim){drawol(g, ctc, sc);}
+		    if (mousepos != null && Config.assign_to_tile)
+				if (mouseTilePos.y == ctc.y && mouseTilePos.x == ctc.x)
+					drawTileSelection(g, ctc, sc);
 		}
 	    }
 	}
@@ -1411,6 +1438,7 @@ public class MapView extends Widget implements DTarget, Console.Directory {
 	cc = new Coord((int) (cc.x/getScale()), (int)(cc.y/getScale()));
 	Gob hit = gobatpos(cc);
 	Coord mc = s2m(cc.add(viewoffset(sz, this.mc).inv()));
+	if (Config.assign_to_tile) mc = tilify(mc);
 	if(hit == null)
 	    wdgmsg("itemact", cc0, mc, ui.modflags());
 	else
